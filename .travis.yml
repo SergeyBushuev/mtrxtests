@@ -1,0 +1,13 @@
+language: cpp
+script: 
+  - mkdir build
+  - cd build
+  - cmake .. && make
+  - test
+
+compiler:
+  - clang
+  - gcc
+  
+notifications:
+  email: false
