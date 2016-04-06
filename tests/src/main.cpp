@@ -1,4 +1,6 @@
 #include <mtrx.h>
+
+#include <catch.hpp>
 #include <fstream>
 #include <iostream>
 using namespace std;
