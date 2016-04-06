@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 
-set(TESTS_FOR_PROJECT Matrix)
+set(PROJECT Matrix)
 
-project(Tests)
+project (${PROJECT})
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 option(TESTS_FOR_${PROJECT} "Include tests for project" ON)
@@ -17,18 +18,6 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 
 add_library (${PROJECT} STATIC ${HEADERS} ${SOURCES})
 
-option(BUILD_SHARED_LIBS "Build shared instead of static library" OFF)
-
-file(GLOB ${PROJECT_NAME}_sources "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
-
-find_package(${TESTS_FOR_PROJECT})
-include_directories(${${TESTS_FOR_PROJECT}_INCLUDE_DIRS}})
-
-
-add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources} ${${PROJECT_NAME}_headers})
-
-target_link_libraries(${PROJECT_NAME} ${TESTS_FOR_PROJECT})
-
-
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${PROJECT_NAME} -s -r compact WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+if (TESTS_FOR_${PROJECT})
+  add_subdirectory(tests)
+endif ()
