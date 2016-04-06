@@ -1,17 +1,59 @@
+#include <mtrx.h>
+#include <fstream>
 #include <iostream>
-#include "mtrx.h"
-#include <assert.h>
-
 using namespace std;
 
-int main()
+SCENARIO("Matrix init", "[init]") {
+
+	GIVEN("The number of lines and columns") {
+
+		auto lines = 5;
+		auto columns = 5;
+
+		WHEN("Create instansce of Matrix") {
+			Matrix matrix(lines, columns);
+			THEN("The number of lines and columns must be preserved") {
+
+				REQUIRE(matrix.cout_lines() == lines);
+				REQUIRE(matrix.cout_columns() == columns);
+			}
+		}
+	}
+}
+SCENARIO("Matrix +", "[addition]") {
+	Matrix matrix = Matrix(5, 5);
+	matrix.read_matrix("1.txt");
+	Matrix matrixg = Matrix(5, 5);
+	matrixg.read_matrix("2.txt");
+	Matrix expected = Matrix(5, 5);
+	expected.read_matrix("1+2.txt");
+	Matrix result = matrix + matrixg;
+	REQUIRE(result == expected);
+}
+
+SCENARIO("Matrix *", "[addition]") {
+	Matrix matrix = Matrix(5, 5);
+	matrix.read_matrix("1.txt");
+	Matrix matrixg = Matrix(5, 5);
+	matrixg.read_matrix("2.txt");
+	Matrix expected = Matrix(5, 5);
+	expected.read_matrix("1_2.txt");
+	Matrix result = matrix * matrixg;
+	REQUIRE(result == expected);
+}
+
+SCENARIO("Matrix: operator ==", "[equal]") {
+	Matrix matrix, matrixg;
+	matrix.read_matrix("1.txt");
+	matrixg.read_matrix("1.txt");
+	bool f = (matrix == matrixg);
+	REQUIRE(f);
+}
+
+SCENARIO("Matrix operator [](int)", "[s]") 
 {
-    Rectangle rect;
-    rect.set_values(2, 5);
-    assert(rect.return_square() == 10);
-    rect.set_values(0, 100);
-    assert(rect.return_square() == 0);
-    rect.set_values(1, 1);
-    assert(rect.return_square() == 1);
-    return 0;
+	Matrix matrix(5,5);
+	matrix.read_matrix("1.txt");
+	int* s = matrix[1];
+	REQUIRE(s[0]==1);
 }
