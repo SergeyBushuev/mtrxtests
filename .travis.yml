@@ -7,7 +7,7 @@ script:
 
 compiler:
   - clang
-  - gcc
+  - gcc 
   
 notifications:
   email: false
