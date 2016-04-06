@@ -3,7 +3,6 @@ script:
   - mkdir build
   - cd build
   - cmake .. && make
-  - test
 
 compiler:
   - clang
