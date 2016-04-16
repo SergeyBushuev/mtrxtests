@@ -17,9 +17,9 @@ private:
 public:
 	int cout_columns() const;
 	int cout_lines() const;
-	Matrix();
-	Matrix(const Matrix &a);
-	~Matrix();
+	Matrix<T>();
+	Matrix<T>(const Matrix &a);
+	~Matrix<T>();
 	Matrix(int _lines, int _columns);
 	void read_matrix(std::string s);
 	void print_matrix() const;
