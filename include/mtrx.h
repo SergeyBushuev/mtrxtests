@@ -5,12 +5,15 @@
 #include <stdlib.h>
 #include <fstream>
 using namespace std;
+template <typename T>
+class Matrix;
+
 class Matrix
 {
 private:
 	int lines;
 	int columns;
-	int **massiv;
+	T **massiv;
 public:
 	int cout_columns() const;
 	int cout_lines() const;
