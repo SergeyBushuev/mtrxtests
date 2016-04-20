@@ -3,10 +3,11 @@
 #include <fstream>
 using namespace std;
 
-Matrix::Matrix() : lines(0), columns(0), massiv(nullptr)
+template <typename T>
+Matrix<T>::Matrix() : lines(0), columns(0), massiv(nullptr)
 {}
-
-Matrix::Matrix(const Matrix &a)
+template <typename T>
+Matrix<T>::Matrix(const Matrix &a)
 {
 	lines = a.lines;
 	columns = a.columns;
@@ -20,8 +21,8 @@ Matrix::Matrix(const Matrix &a)
 	}
 
 }
-
-Matrix::Matrix(int _lines, int _columns) : lines(_lines), columns(_columns)
+template <typename T>
+Matrix<T>::Matrix(int _lines, int _columns) : lines(_lines), columns(_columns)
 {
 	massiv = new int*[lines];
 	for (int i = 0; i < lines; i++)
@@ -32,8 +33,8 @@ Matrix::Matrix(int _lines, int _columns) : lines(_lines), columns(_columns)
 	}
 
 }
-
-void Matrix::read_matrix(const std::string s)
+template <typename T>
+void Matrix<T>::read_matrix(const std::string s)
 {
 	ifstream fin(s);
 	for (int i = 0; i < lines; i++)
@@ -42,7 +43,8 @@ void Matrix::read_matrix(const std::string s)
 	fin.close();
 
 }
-void Matrix::print_matrix() const
+template <typename T>
+void Matrix<T>::print_matrix() const
 {
 	for (int i = 0; i < lines; i++) {
 
@@ -51,7 +53,8 @@ void Matrix::print_matrix() const
 		cout << endl;
 	}
 }
-Matrix & Matrix::operator = (Matrix &a)
+template <typename T>
+Matrix<T> & Matrix<T>::operator = (Matrix &a)
 {
 	for (int i = 0; i < lines; i++)
 
@@ -69,8 +72,8 @@ Matrix & Matrix::operator = (Matrix &a)
 	return *this;
 }
 
-
-Matrix Matrix::operator + (const Matrix &array)
+template <typename T>
+Matrix<T> Matrix<T>::operator + (const Matrix &array)
 {
 
 	Matrix result(*this);
@@ -80,7 +83,7 @@ Matrix Matrix::operator + (const Matrix &array)
 	return(result);
 }
 
-Matrix Matrix::operator * (const Matrix &array)
+Matrix<T> Matrix<T>::operator * (const Matrix &array)
 {
 
 	Matrix result(lines, array.columns);
@@ -92,7 +95,7 @@ Matrix Matrix::operator * (const Matrix &array)
 	return result;
 }
 
-int* Matrix::operator [] (int i) const
+int* Matrix<T>::operator [] (int i) const
 {
 	if ((i - 1) < 0) exit(0);
 	int *temp = new int[columns];
@@ -101,25 +104,25 @@ int* Matrix::operator [] (int i) const
 	return(temp);
 
 }
-int Matrix::cout_columns() const
+int Matrix<T>::cout_columns() const
 {
 	return(columns);
 
 
 }
 
-int Matrix::cout_lines() const
+int Matrix<T>::cout_lines() const
 {
 	return(lines);
 }
-void Matrix::reset()
+void Matrix<T>::reset()
 {
 	for (int i = 0; i < lines; i++)
 		for (int j = 0; j < columns; j++)
 			massiv[i][j] = 0;
 }
 
-bool Matrix::operator ==(const Matrix &array) const{
+bool Matrix<T>::operator ==(const Matrix &array) const{
 		if (lines != array.lines || columns != array.columns)
 			return false; 
 
@@ -130,7 +133,7 @@ bool Matrix::operator ==(const Matrix &array) const{
 
 		return true; 
 	}
-Matrix::~Matrix()
+Matrix<T>::~Matrix()
 {
 	for (int i = 0; i < lines; i++)
 
