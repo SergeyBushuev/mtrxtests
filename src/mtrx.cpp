@@ -82,7 +82,7 @@ Matrix<T> Matrix<T>::operator + (const Matrix &array)
 			result.massiv[i][j] += array.massiv[i][j];
 	return(result);
 }
-
+template <typename T>
 Matrix<T> Matrix<T>::operator * (const Matrix &array)
 {
 
@@ -94,7 +94,7 @@ Matrix<T> Matrix<T>::operator * (const Matrix &array)
 				result.massiv[i][j] += massiv[i][t] * array.massiv[t][j];
 	return result;
 }
-
+template <typename T>
 int* Matrix<T>::operator [] (int i) const
 {
 	if ((i - 1) < 0) exit(0);
@@ -104,24 +104,26 @@ int* Matrix<T>::operator [] (int i) const
 	return(temp);
 
 }
+template <typename T>
 int Matrix<T>::cout_columns() const
 {
 	return(columns);
 
 
 }
-
+template <typename T>
 int Matrix<T>::cout_lines() const
 {
 	return(lines);
 }
+template <typename T>
 void Matrix<T>::reset()
 {
 	for (int i = 0; i < lines; i++)
 		for (int j = 0; j < columns; j++)
 			massiv[i][j] = 0;
 }
-
+template <typename T>
 bool Matrix<T>::operator ==(const Matrix &array) const{
 		if (lines != array.lines || columns != array.columns)
 			return false; 
@@ -133,6 +135,7 @@ bool Matrix<T>::operator ==(const Matrix &array) const{
 
 		return true; 
 	}
+template <typename T>
 Matrix<T>::~Matrix()
 {
 	for (int i = 0; i < lines; i++)
